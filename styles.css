@@ -1,0 +1,63 @@
+body {
+    background-color: #080808;
+    display: flex;
+    margin: 0;
+    overflow: hidden;
+}
+
+aside {
+    border-right: 1px dashed grey;
+    height: 100vh;
+    flex: 1;
+}
+
+main {
+    display: flex;
+    flex: 3;
+    height: 100vh;
+    width: 100%;
+}
+
+.column {
+    height: 100vh;
+    flex: 1;
+}
+
+.item {
+    width: 100%;
+    height: 40rem;
+}
+
+.a {
+    background-color: red;
+}
+
+.b {
+    background-color: blue;
+}
+
+.c {
+    background-color: green;
+}
+
+.d {
+    background-color: yellow;
+}
+
+.e {
+    background-color: pink;
+}
+
+#innerColumn {
+    transform: scaleY(-1); /* Flip the container */
+}
+
+.hide-scrollbar {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; 
+}
