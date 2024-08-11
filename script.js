@@ -46,18 +46,7 @@ projects.forEach(project => {
     items.push(itemHTML);
 });
 
-/*  '<div class="item">
-                <div class="image-container"></div>
-                <div class="title">ProjectName</div>
-                <div class="description">Short description of the project.</div>
-                <div class="tags-container">
-                    <div class="tag">TagName1</div>
-                    <div class="tag">TagName2</div>
-                    <div class="tag">TagName3</div>
-                </div>
-            </div>' */
-
-
+let scrollEnabled = true;
 
 const columns = document.querySelectorAll(".column");
 
@@ -71,7 +60,6 @@ const addNewItem = (column, position) => {
     window.requestAnimationFrame(() => {
         const item = getNewItem();
         column.insertAdjacentHTML(position, item);
-        //console.log("add");
     });
 }
 
@@ -105,23 +93,22 @@ const synchroniseScroll = (event) => {
 }
 
 const handleColumnScroll = (event, column) => {
+    if (!scrollEnabled) return;
     synchroniseScroll(event);
     updateColumnItems(column);
-    console.log('scroll is being');
     updateMouseOver();
 }
 
 columns.forEach((column) => {
     column.addEventListener("scroll", (event) => handleColumnScroll(event, column));
-    addNewTopItem(column);   
-    addNewTopItem(column);
-    addNewTopItem(column);
-    addNewTopItem(column);
-    addNewTopItem(column);                   
+    addNewItem(column, "afterbegin");  
+    addNewItem(column, "afterbegin");
+    addNewItem(column, "afterbegin");
+    addNewItem(column, "afterbegin");
+    addNewItem(column, "afterbegin");                  
 });
 
 const handleMouseOver = (element) => {
-    console.log("handling");
     const hoverItems = document.querySelectorAll(".item-hover");
     hoverItems.forEach((hoverItem) => {
         hoverItem.classList.remove("item-hover");
@@ -190,4 +177,26 @@ window.addEventListener("mousemove", (event) => {
 
 window.addEventListener("mouseover", (event) => {
     handleMouseOver(event.target);
+});
+
+const main = document.querySelector("main");
+
+document.addEventListener("click", (event) => {
+    const item = event.target.closest(".item");
+    if(!item) return;
+
+    scrollEnabled = false;
+
+    main.classList.add("main-single");
+
+    columns.forEach((column) => column.classList.add("no-scroll"));
+    const column = item.closest(".column");
+    column.classList.add("column-clicked");
+
+    item.classList.add("item-clicked");
+    scrollEnabled = false;
+    console.log("click", item);
+
+    item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 });
