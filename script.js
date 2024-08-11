@@ -3,6 +3,31 @@ const projects = [
         title: "ProjectName 1",
         description: "Short description of the project 1.",
         tags: ["Tag11", "Tag12", "Tag13"]
+    },
+    {
+        title: "ProjectName 2",
+        description: "Short description of the project 2.",
+        tags: ["Tag21", "Tag22", "Tag23"]
+    },
+    {
+        title: "ProjectName 3",
+        description: "Short description of the project 3.",
+        tags: ["Tag31", "Tag32", "Tag33"]
+    },
+    {
+        title: "ProjectName 4",
+        description: "Short description of the project 4.",
+        tags: ["Tag41", "Tag42", "Tag43"]
+    },
+    {
+        title: "ProjectName 5",
+        description: "Short description of the project 5.",
+        tags: ["Tag51", "Tag52", "Tag53"]
+    },
+    {
+        title: "ProjectName 6",
+        description: "Short description of the project 6.",
+        tags: ["Tag61", "Tag62", "Tag63"]
     }
 ]
 
@@ -12,8 +37,10 @@ projects.forEach(project => {
     const tagsHTML = project.tags.map(tag => `<div class="tag">${tag}</div>`).join('');
     const itemHTML = `<div class="item">
         <div class="image-container"></div>
-        <div class="title">${project.title}</div>
-        <div class="description">${project.description}</div>
+        <div class="info-container">
+            <div class="title">${project.title}</div>
+            <div class="description">${project.description}</div>
+        </div>
         <div class="tags-container">${tagsHTML}</div>
     </div>`;
     items.push(itemHTML);
@@ -80,6 +107,8 @@ const synchroniseScroll = (event) => {
 const handleColumnScroll = (event, column) => {
     synchroniseScroll(event);
     updateColumnItems(column);
+    console.log('scroll is being');
+    updateMouseOver();
 }
 
 columns.forEach((column) => {
@@ -90,6 +119,28 @@ columns.forEach((column) => {
     addNewTopItem(column);
     addNewTopItem(column);                   
 });
+
+const handleMouseOver = (element) => {
+    console.log("handling");
+    const hoverItems = document.querySelectorAll(".item-hover");
+    hoverItems.forEach((hoverItem) => {
+        hoverItem.classList.remove("item-hover");
+    });
+
+    const closestItem = element.closest(".item");
+    if (closestItem) {
+        closestItem.classList.add("item-hover");
+        mouseCenter.classList.add("mouse-center-large");
+    } else {
+        mouseCenter.classList.remove("mouse-center-large");
+    }
+
+}
+
+const updateMouseOver = () => {
+    const elementUnderMouse = document.elementFromPoint(lastKnownX, lastKnownY);
+    handleMouseOver(elementUnderMouse);
+}
 
 window.onload = () => {
     const column = columns[0];
@@ -127,18 +178,16 @@ window.addEventListener("mousemove", (event) => {
 });
 */
 
+let lastKnownX = 0;
+let lastKnownY = 0;
+
 window.addEventListener("mousemove", (event) => {
+    lastKnownX = event.clientX;
+    lastKnownY = event.clientY;
     mouseCenter.style.transform = `translate(${event.clientX - mouseCenter.clientHeight/2}px, ${event.clientY - mouseCenter.clientHeight/2}px)`;
     mouseCircle.style.transform = `translate(${event.clientX - mouseCircleOffset}px, ${event.clientY - mouseCircleOffset}px)`;
 });
 
 window.addEventListener("mouseover", (event) => {
-    console.log(event.target.classList);
-    if (event.target.closest(".item")) { //if (event.target.classList.contains("item")) {
-        console.log("true");
-        mouseCenter.classList.add("mouse-center-large");
-    } else { 
-        mouseCenter.classList.remove("mouse-center-large");
-    }
-    console.log(event.target);
+    handleMouseOver(event.target);
 });
