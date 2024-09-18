@@ -223,7 +223,7 @@ main {
     height: 0.5rem;
     border-radius: 0.25rem;
     transition: width 0.1s ease, height 0.1s ease, border-radius 0.1s ease;
-    transform: rotate(-45deg);
+    /*transform: rotate(-45deg);*/
 }
 
 .mouse-circle {

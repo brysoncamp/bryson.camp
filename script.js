@@ -1,23 +1,23 @@
 const projects = [
     {
-        title: "ProjectName 1",
-        description: "Short description of the project 1.",
-        tags: ["Tag11", "Tag12", "Tag13"]
+        title: "Split Prompt",
+        description: "Recursive Prompt Splitter for ChatGPT",
+        tags: ["Website", "JavaScript", "Tag12", "Tag13"]
     },
     {
-        title: "ProjectName 2",
-        description: "Short description of the project 2.",
-        tags: ["Tag21", "Tag22", "Tag23"]
+        title: "PyFiddle",
+        description: "Run and share Python code snippets online",
+        tags: ["Web App", "React", "AWS", "Pyodide"]
     },
     {
-        title: "ProjectName 3",
-        description: "Short description of the project 3.",
-        tags: ["Tag31", "Tag32", "Tag33"]
+        title: "Multi-Select for Xero",
+        description: "Edit multiple rows in a bill at once",
+        tags: ["Web Extension", "JavaScript"]
     },
     {
-        title: "ProjectName 4",
-        description: "Short description of the project 4.",
-        tags: ["Tag41", "Tag42", "Tag43"]
+        title: "DropEntry",
+        description: "Automate data entry for Xero",
+        tags: ["Web App", "React", "AWS", "Xero API"]
     },
     {
         title: "ProjectName 5",
@@ -171,8 +171,31 @@ let lastKnownY = 0;
 window.addEventListener("mousemove", (event) => {
     lastKnownX = event.clientX;
     lastKnownY = event.clientY;
-    mouseCenter.style.transform = `translate(${event.clientX - mouseCenter.clientHeight/2}px, ${event.clientY - mouseCenter.clientHeight/2}px)`;
+
+    let rotationAngle = 0;
+
+    const closestItem = event.target.closest(".item");
+    if (closestItem) {
+        // get the center of that div.
+        const rect = closestItem.getBoundingClientRect();
+        const centerX = rect.x + rect.width/2;
+        const centerY = rect.y + rect.height/2;
+        // get the angle between the mouse and the center of the div.
+        rotationAngle = Math.atan2(event.clientY - centerY, event.clientX - centerX) + Math.PI;
+
+    }
+    console.log(closestItem);
+
+    // want to rotate the arrow to be towards the center of the div it is on. 
+    // get the .item class that is closest to the mouse.
+    // get the center of that div.
+    // get the angle between the mouse and the center of the div.
+    // rotate the arrow by that angle.
+
+    mouseCenter.style.transform = `translate(${event.clientX - mouseCenter.clientHeight/2}px, ${event.clientY - mouseCenter.clientHeight/2}px) rotate(${rotationAngle}rad)`;
+    //mouseCircle.style.transform = `translate(${event.clientX - mouseCircleOffset}px, ${event.clientY - mouseCircleOffset}px)`;
     mouseCircle.style.transform = `translate(${event.clientX - mouseCircleOffset}px, ${event.clientY - mouseCircleOffset}px)`;
+
 });
 
 window.addEventListener("mouseover", (event) => {
