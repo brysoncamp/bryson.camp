@@ -9,45 +9,25 @@
 </head>
 <body>
     <div id="mouseCenter" class="mouse-center mouse">
-        <div>
+        <div style="overflow: hidden">
             <img src="arrow.svg"/>
+            <img id="returnCursor" class="return-cursor hide-return" src="return.svg"/>
         </div>
     </div>
     <div id="mouseCircle" class="mouse-circle mouse"></div>
     <aside>
-        <h1>bryson camp</h1>
+        <h1>bryson <caption></caption>camp</h1>
         <h2>full stack web developer</h2>
-        <button>about</button>
-        <button>contact</button>
+        <p id="aboutText" class="about hide-height">Hi, I’m Bryson. I love building creative web applications from intuitive front ends to robust back ends. Currently seeking a full-time graduate position where I can apply my skills in web development and cloud architecture</p>
+        <div class="buttons">
+            <button id="aboutButton" class="button">about</button>
+            <button class="button">contact</button>
+        </div>
     </aside>
     <main>
-        <div class="column hide-scrollbar">
-            <!--
-            <div class="item">
-                <div class="image-container"></div>
-                <div class="title">ProjectName</div>
-                <div class="description">Short description of the project.</div>
-                <div class="tags-container">
-                    <div class="tag">TagName1</div>
-                    <div class="tag">TagName2</div>
-                    <div class="tag">TagName3</div>
-                </div>
-            </div>
-            <div class="item b"></div>
-            <div class="item c"></div>-->
-        </div>
-        <div class="column hide-scrollbar">
-            <!--
-            <div class="item b"></div>
-            <div class="item c"></div>
-            <div class="item a"></div>-->
-        </div>
-        <div class="column hide-scrollbar">
-            <!--
-            <div class="item c"></div>
-            <div class="item a"></div>
-            <div class="item b"></div>-->
-        </div>
+        <div class="column hide-scrollbar"></div>
+        <div class="column hide-scrollbar"></div>
+        <div class="column hide-scrollbar"></div>
     </main>
     <script src="script.js"></script>
 </body>
